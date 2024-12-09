@@ -17,14 +17,12 @@
     'use strict';
 
     { 
-      const Todo = () => {
+      const Todo = (props) => {
         return(
           <li>
             <label>
               <input type="checkbox" />
-              <span>
-                aaa
-              </span>
+              <span>{props.todo.title}</span>
             </label>
             <button>Del</button>
           </li>
@@ -38,6 +36,15 @@
           {id: 0, title: 'ccc', isCompleted: false},
         ];
 
+        const todoItems = todos.map((todo) => {
+          return(
+            <Todo
+              key={todo.id}
+              todo={todo}
+            />
+          );
+        });
+
         return (
           <>
             <h1>
@@ -45,9 +52,7 @@
               <button id="purge">Purge</button>
             </h1>
             <ul id="todos">
-              <Todo />
-              <Todo />
-              <Todo />
+              {todoItems}
             </ul>
             <form id="add-form">
               <input type="text"/>
