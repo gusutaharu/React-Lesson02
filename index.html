@@ -37,7 +37,13 @@
         ]);
 
         const hanndleTodoDeleteClick = (id) => {
-          
+          if(!confirm('Sure?')){
+            return;
+          }
+          const newTodos = todos.filter((todo)=>{
+            return todo.id !== id;
+          });
+          setTodos(newTodos);
         };
 
         const todoItems = todos.map((todo) => {
