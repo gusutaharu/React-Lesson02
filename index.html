@@ -40,6 +40,20 @@
         );
       };
 
+      const AddForm = () => {
+        const [title, setTitle] = React.useState('');
+
+        return (
+          <form>
+            <input
+              type="text"
+              value={title}
+            />
+            <button>Add</button>
+          </form>
+        );
+      };
+
       const App = () => {
         const [todos, setTodos] = React.useState([
           {id: 0, title: 'aaa', isCompleted: false},
@@ -88,10 +102,7 @@
             <ul id="todos">
               {todoItems}
             </ul>
-            <form id="add-form">
-              <input type="text"/>
-              <button>Add</button>
-            </form>
+            <AddForm />
           </>
         );
       };
