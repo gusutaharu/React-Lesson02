@@ -18,13 +18,16 @@
 
     { 
       const Todo = (props) => {
+        const hanndleDeleteClick = ()=> {
+          props.onDeleteClick(props.todo.id);
+        };
         return(
           <li>
             <label>
               <input type="checkbox" />
               <span>{props.todo.title}</span>
             </label>
-            <button>Del</button>
+            <button onClick={hanndleDeleteClick}>Del</button>
           </li>
         );
       };
@@ -32,8 +35,8 @@
       const App = () => {
         const [todos, setTodos] = React.useState([
           {id: 0, title: 'aaa', isCompleted: false},
-          {id: 0, title: 'bbb', isCompleted: true},
-          {id: 0, title: 'ccc', isCompleted: false},
+          {id: 1, title: 'bbb', isCompleted: true},
+          {id: 2, title: 'ccc', isCompleted: false},
         ]);
 
         const hanndleTodoDeleteClick = (id) => {
@@ -51,6 +54,7 @@
             <Todo
               key={todo.id}
               todo={todo}
+              onDeleteClick={hanndleTodoDeleteClick}
             />
           );
         });
