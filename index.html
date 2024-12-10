@@ -64,6 +64,16 @@
           {id: 2, title: 'ccc', isCompleted: false},
         ]);
 
+        const handleAddFormSubmit = () => {
+          const newTodos = [...todos];
+          newTodos.push({
+            id: Date.now(),
+            title: title,
+            isCompleted: false,
+          });
+          setTodos(newTodos);
+        };
+
         const handleTodoCheckboxChange = (id)=> {
           const newTodos = todos.map((todo)=>{
             return{
