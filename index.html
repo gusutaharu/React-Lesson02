@@ -18,16 +18,24 @@
 
     { 
       const Todo = (props) => {
-        const hanndleDeleteClick = ()=> {
+        const handleDeleteClick = ()=> {
           props.onDeleteClick(props.todo.id);
+        };
+
+        const handleCheckboxChange = ()=> {
+          props.onCheckboxChange(props.todo.id);
         };
         return(
           <li>
             <label>
-              <input type="checkbox" checked={props.todo.isCompleted}/>
+              <input
+                type="checkbox"
+                checked={props.todo.isCompleted}
+                onChange={handleCheckboxChange}
+              />
               <span>{props.todo.title}</span>
             </label>
-            <button onClick={hanndleDeleteClick}>Del</button>
+            <button onClick={handleDeleteClick}>Del</button>
           </li>
         );
       };
@@ -44,13 +52,13 @@
             return{
               id: todo.id,
               title: todo.title,
-              isCompleted: todo.id === id ? !todo.isCompleted: todo.isCompleted,
+              isCompleted: todo.id === id ? !todo.isCompleted : todo.isCompleted,
             };
           });
           setTodos(newTodos);
         };
 
-        const hanndleTodoDeleteClick = (id) => {
+        const handleTodoDeleteClick = (id) => {
           if(!confirm('Sure?')){
             return;
           }
@@ -65,7 +73,8 @@
             <Todo
               key={todo.id}
               todo={todo}
-              onDeleteClick={hanndleTodoDeleteClick}
+              onDeleteClick={handleTodoDeleteClick}
+              onCheckboxChange={handleTodoCheckboxChange}
             />
           );
         });
