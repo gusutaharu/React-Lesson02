@@ -69,6 +69,16 @@
       const App = () => {
         const [todos, setTodos] = React.useState([]);
 
+        React.useEffect(() => {
+          let savedTodos;
+          if (localStorage.getItem('todos') === null ) {
+            savedTodos = [];
+          } else {
+            savedTodos = JSON.parse(localStorage.getItem('todos'));
+          }
+          setTodos(savedTodos);
+        }, []);
+
         const updateTodos = (newTodos) => {
           setTodos(newTodos);
           localStorage.setItem('todos', JSON.stringify(newTodos));
