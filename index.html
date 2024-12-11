@@ -67,11 +67,12 @@
       };
 
       const App = () => {
-        const [todos, setTodos] = React.useState([
-          {id: 0, title: 'aaa', isCompleted: false},
-          {id: 1, title: 'bbb', isCompleted: true},
-          {id: 2, title: 'ccc', isCompleted: false},
-        ]);
+        const [todos, setTodos] = React.useState([]);
+
+        const updateTodos = (newTodos) => {
+          setTodos(newTodos);
+          localStorage.setItem('todos', JSON.stringify(newTodos));
+        };
 
         const handlePurgeClick = () => {
           if (!confirm('Sure?')){
@@ -80,7 +81,7 @@
           const newTodos = todos.filter((todo) => {
             return todo.isCompleted === false;
           });
-          setTodos(newTodos);
+          updateTodos(newTodos);
         };
 
         const handleAddFormSubmit = (title) => {
@@ -90,7 +91,7 @@
             title: title,
             isCompleted: false,
           });
-          setTodos(newTodos);
+          updateTodos(newTodos);
         };
 
         const handleTodoCheckboxChange = (id)=> {
@@ -101,7 +102,7 @@
               isCompleted: todo.id === id ? !todo.isCompleted : todo.isCompleted,
             };
           });
-          setTodos(newTodos);
+          updateTodos(newTodos);
         };
 
         const handleTodoDeleteClick = (id) => {
@@ -111,7 +112,7 @@
           const newTodos = todos.filter((todo)=>{
             return todo.id !== id;
           });
-          setTodos(newTodos);
+          updateTodos(newTodos);
         };
 
         const todoItems = todos.map((todo) => {
