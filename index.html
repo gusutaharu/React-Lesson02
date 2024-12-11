@@ -42,12 +42,16 @@
 
       const AddForm = (props) => {
         const [title, setTitle] = React.useState('');
+        const inputRef = React.useRef(null);
+
         const handleTextChange = (e) => {
           setTitle(e.currentTarget.value);
         };
         const handleSubmit = (e) => {
           e.preventDefault();
           props.onSubmit(title);
+          setTitle('');
+          inputRef.current.focus();
         };
         return (
           <form onSubmit={handleSubmit}>
@@ -55,6 +59,7 @@
               type="text"
               value={title}
               onChange={handleTextChange}
+              ref={inputRef}
             />
             <button>Add</button>
           </form>
